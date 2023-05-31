@@ -5,17 +5,44 @@
  * @format
  */
 
-import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '@env';
-import React from 'react';
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN, GRAPHQL_ENDPOINT } from '@env';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StyleSheet, useColorScheme, View } from 'react-native';
 
 import { Auth0Provider, useAuth0 } from 'react-native-auth0';
-import { theme } from './theme/theme';
+import { theme } from './shared/theme/theme';
 import { Button, NativeBaseProvider } from 'native-base';
+import { apolloClient, createAuthApolloLink } from './shared/graphql/client';
+import { ApolloProvider, gql, useQuery } from '@apollo/client';
 
 function InnerApp(): JSX.Element {
-  const { authorize, user, clearCredentials } = useAuth0();
-  // const isDarkMode = useColorScheme() === 'dark';
+  const { authorize, user, clearCredentials, getCredentials } = useAuth0();
+
+  useEffect(() => {
+    if (user) {
+      apolloClient.setLink(createAuthApolloLink(getCredentials));
+    }
+  }, [user, getCredentials]);
+  const { data, refetch } = useQuery(
+    gql`
+      query {
+        users {
+          id
+          email
+          last_login
+        }
+      }
+    `,
+    {
+      skip: !user,
+      onError: e => {
+        console.log(e);
+      },
+    },
+  );
+
+  console.log(data);
+
   return (
     <View style={styles.sectionContainer}>
       <Button
@@ -24,10 +51,24 @@ function InnerApp(): JSX.Element {
             clearCredentials();
             return;
           }
-          authorize({ prompt: 'login' }, { ephemeralSession: true });
+          authorize(
+            {
+              prompt: 'login',
+              scope: 'openid profile email offline_access',
+              audience: GRAPHQL_ENDPOINT,
+            },
+            { ephemeralSession: true },
+          );
         }}
       >
-        {user ? 'log ou' : 'log in'}
+        {user ? 'log out' : 'log in'}
+      </Button>
+      <Button
+        onPress={() => {
+          refetch();
+        }}
+      >
+        refetch
       </Button>
     </View>
   );
@@ -44,7 +85,9 @@ function App(): JSX.Element {
     <NativeBaseProvider theme={theme}>
       <SafeAreaView style={backgroundStyle}>
         <Auth0Provider clientId={AUTH0_CLIENT_ID} domain={AUTH0_DOMAIN}>
-          <InnerApp />
+          <ApolloProvider client={apolloClient}>
+            <InnerApp />
+          </ApolloProvider>
         </Auth0Provider>
       </SafeAreaView>
     </NativeBaseProvider>

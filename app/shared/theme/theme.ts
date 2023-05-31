@@ -1,18 +1,7 @@
 // import { MD3Theme, DefaultTheme } from 'react-native-paper';
 
 import { extendTheme, Theme } from 'native-base';
-import { DeepPartial } from '../types/helpers-types';
-
-// export const theme = {
-//   ...DefaultTheme,
-//   roundness: 2,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: '#30A2FF',
-//     secondary: '#00C4FF',
-//     tertiary: '#FFE7A0',
-//   }, // Copy it from the color codes scheme and then use it here
-// };
+import { DeepPartial } from '../../types/helpers-types';
 
 const themeObject: DeepPartial<Theme> = {
   colors: {
