@@ -27,12 +27,11 @@ function InnerApp(): JSX.Element {
     <View style={styles.sectionContainer}>
       <Button
         onPress={() => {
-          // authorize({}, { ephemeralSession: true });
           if (user) {
             clearCredentials();
             return;
           }
-          authorize({}, { ephemeralSession: true });
+          authorize({ prompt: 'login' }, { ephemeralSession: true });
         }}
         title={user ? 'log out' : 'Log in'}
       />
