@@ -7,18 +7,11 @@
 
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '@env';
 import React from 'react';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { SafeAreaView, StyleSheet, useColorScheme, View } from 'react-native';
 
 import { Auth0Provider, useAuth0 } from 'react-native-auth0';
+import { theme } from './theme/theme';
+import { Button, NativeBaseProvider } from 'native-base';
 
 function InnerApp(): JSX.Element {
   const { authorize, user, clearCredentials } = useAuth0();
@@ -33,8 +26,9 @@ function InnerApp(): JSX.Element {
           }
           authorize({ prompt: 'login' }, { ephemeralSession: true });
         }}
-        title={user ? 'log out' : 'Log in'}
-      />
+      >
+        {user ? 'log ou' : 'log in'}
+      </Button>
     </View>
   );
 }
@@ -46,14 +40,14 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? '#000' : '#fff',
   };
 
-  console.log(AUTH0_DOMAIN);
-
   return (
-    <Auth0Provider clientId={AUTH0_CLIENT_ID} domain={AUTH0_DOMAIN}>
+    <NativeBaseProvider theme={theme}>
       <SafeAreaView style={backgroundStyle}>
-        <InnerApp />
+        <Auth0Provider clientId={AUTH0_CLIENT_ID} domain={AUTH0_DOMAIN}>
+          <InnerApp />
+        </Auth0Provider>
       </SafeAreaView>
-    </Auth0Provider>
+    </NativeBaseProvider>
   );
 }
 
