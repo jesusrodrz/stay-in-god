@@ -2,6 +2,10 @@
 
 import { extendTheme, Theme } from 'native-base';
 import { DeepPartial } from '../../types/helpers-types';
+import {
+  DefaultTheme,
+  Theme as NavigationTheme,
+} from '@react-navigation/native';
 
 const themeObject: DeepPartial<Theme> = {
   colors: {
@@ -49,5 +53,21 @@ const themeObject: DeepPartial<Theme> = {
       },
     },
   },
+  fontSizes: {
+    // xs: 16,
+    sm: 18,
+    md: 20,
+    // lg: 30,
+    // xl: 30,
+  },
+  sizes: {},
 };
 export const theme = extendTheme(themeObject);
+
+export const navigationTheme: NavigationTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: themeObject.colors?.primary?.[400] as string,
+  },
+};
