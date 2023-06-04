@@ -18,6 +18,8 @@ import { RootStack } from '@app/navigators/main-navigators';
 import MainAppScreen from '@app/screens/MainAppScreen';
 import WelcomeScreen from '@app/screens/WelcomeScreen';
 import { navigationTheme, theme } from '@app/shared/theme/theme';
+import FillProfileScreen from '@app/modules/onboarding/FillProfileScreen';
+import OnboardingLoadingScreen from '@app/modules/onboarding/OnboardinLoadingScreen';
 
 function InnerApp(): JSX.Element {
   const { user, clearCredentials, getCredentials, isLoading } = useAuth0();
@@ -33,39 +35,24 @@ function InnerApp(): JSX.Element {
   if (isLoading) {
     return <SplashScreen />;
   }
-  console.log('isAuthenticated: ', isAuthenticated);
 
   return (
     <RootStack.Navigator
       screenOptions={{
         headerShown: false,
+        animation: 'fade_from_bottom',
       }}
     >
       {isAuthenticated ? (
         <>
           <RootStack.Screen
-            name="main"
-            component={MainAppScreen}
-            options={{
-              animation: 'fade_from_bottom',
-            }}
+            name="OnboardingLoading"
+            component={OnboardingLoadingScreen}
           />
-          <RootStack.Screen
-            name="main"
-            component={MainAppScreen}
-            options={{
-              animation: 'fade_from_bottom',
-            }}
-          />
+          <RootStack.Screen name="main" component={MainAppScreen} />
+          <RootStack.Screen name="FillProfile" component={FillProfileScreen} />
           <RootStack.Screen
             name="profile"
-            component={ProfileScreen}
-            options={{
-              animation: 'slide_from_right',
-            }}
-          />
-          <RootStack.Screen
-            name="FillProfile"
             component={ProfileScreen}
             options={{
               animation: 'slide_from_right',

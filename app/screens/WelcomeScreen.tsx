@@ -17,12 +17,15 @@ export default function WelcomeScreen() {
   const login = async () => {
     setIsLoading(true);
     await authorize(
-      { audience: GRAPHQL_ENDPOINT, prompt: 'login' },
+      {
+        audience: GRAPHQL_ENDPOINT,
+        prompt: 'login',
+        scope: 'openid profile email offline_access',
+      },
       { ephemeralSession: true },
     );
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+
+    setIsLoading(false);
   };
   return (
     <ScreenContainer

@@ -34,8 +34,6 @@ export function ScaleLoop({
 
   useEffect(() => {
     if (animate) {
-      console.log('aniamten');
-
       start();
     } else {
       stop();

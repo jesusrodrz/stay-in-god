@@ -4,6 +4,21 @@ declare module '@env' {
   export const GRAPHQL_ENDPOINT: string;
 }
 
+declare var process: {
+  env: {
+    NODE_ENV: string;
+    GRAPHQL_ENDPOINT: string;
+    HASURA_ADMIN_TOKEN: string;
+  };
+};
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      GRAPHQL_ENDPOINT: string;
+      HASURA_ADMIN_TOKEN: string;
+    }
+  }
+}
 declare module '*.png';
 declare module '*.svg';
 declare module '*.jpeg';
