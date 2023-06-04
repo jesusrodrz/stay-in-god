@@ -4,7 +4,7 @@ import { Avatar } from 'native-base';
 import { Text } from 'react-native-svg';
 import { useAuth0 } from 'react-native-auth0';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ScreenContainer } from '../components/containers/ScreensContainers';
+import { ScreenContainer } from '../../components/containers/ScreensContainers';
 
 export default function ProfileScreen() {
   const { clearCredentials } = useAuth0();

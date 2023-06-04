@@ -10,6 +10,16 @@ module.exports = function (api) {
           path: '.env',
         },
       ],
+      [
+        'module-resolver',
+        {
+          root: ['.'],
+          alias: {
+            '@app': './app',
+            '@assets': './app/shared/assets',
+          },
+        },
+      ],
     ],
   };
 };

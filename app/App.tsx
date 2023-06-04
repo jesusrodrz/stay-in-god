@@ -7,19 +7,17 @@
 
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '@env';
 import React, { useEffect } from 'react';
-
 import { Auth0Provider, useAuth0 } from 'react-native-auth0';
-import { navigationTheme, theme } from './shared/theme/theme';
 import { NativeBaseProvider } from 'native-base';
 import { apolloClient, createAuthApolloLink } from './shared/graphql/client';
 import { ApolloProvider } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
-import SplashScreen from './screens/SplashScreen';
-import { RootStack } from './navigators/main-navigators';
-import WelcomeScreen from './screens/WelcomeScreen';
-import MainAppScreen from './screens/MainAppScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import ProfileScreen from '@app/modules/profile/ProfileScreen';
+import SplashScreen from '@app/screens/SplashScreen';
+import { RootStack } from '@app/navigators/main-navigators';
+import MainAppScreen from '@app/screens/MainAppScreen';
+import WelcomeScreen from '@app/screens/WelcomeScreen';
+import { navigationTheme, theme } from '@app/shared/theme/theme';
 
 function InnerApp(): JSX.Element {
   const { user, clearCredentials, getCredentials, isLoading } = useAuth0();
@@ -53,7 +51,21 @@ function InnerApp(): JSX.Element {
             }}
           />
           <RootStack.Screen
+            name="main"
+            component={MainAppScreen}
+            options={{
+              animation: 'fade_from_bottom',
+            }}
+          />
+          <RootStack.Screen
             name="profile"
+            component={ProfileScreen}
+            options={{
+              animation: 'slide_from_right',
+            }}
+          />
+          <RootStack.Screen
+            name="FillProfile"
             component={ProfileScreen}
             options={{
               animation: 'slide_from_right',

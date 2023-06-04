@@ -5,6 +5,7 @@ import { useAuth0 } from 'react-native-auth0';
 import { getOSProperty } from '../shared/utils/platform-utils';
 import { GRAPHQL_ENDPOINT } from '@env';
 import { ScaleLoop } from '../components/animations/ScaleLoop';
+import { ScreenContainer } from '@app/components/containers/ScreensContainers';
 
 export default function WelcomeScreen() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,23 +14,21 @@ export default function WelcomeScreen() {
   const containerSize = 200;
   const logoSize = 250;
 
-  const login = () => {
+  const login = async () => {
     setIsLoading(true);
-    authorize(
+    await authorize(
       { audience: GRAPHQL_ENDPOINT, prompt: 'login' },
       { ephemeralSession: true },
     );
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   };
   return (
-    <VStack
-      w="100%"
-      height="100%"
-      justifyContent="center"
-      alignItems="center"
+    <ScreenContainer
       position="relative"
-      safeArea
       paddingBottom={getOSProperty('android', 10)}
+      alignItems="center"
     >
       <VStack height={containerSize} marginBottom="auto" />
       <ScaleLoop animate={isLoading}>
@@ -53,6 +52,6 @@ export default function WelcomeScreen() {
           Iniciar
         </Button>
       </VStack>
-    </VStack>
+    </ScreenContainer>
   );
 }
