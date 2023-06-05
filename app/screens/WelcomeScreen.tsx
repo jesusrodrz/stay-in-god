@@ -32,6 +32,7 @@ export default function WelcomeScreen() {
       position="relative"
       paddingBottom={getOSProperty('android', 10)}
       alignItems="center"
+      background="white"
     >
       <VStack height={containerSize} marginBottom="auto" />
       <ScaleLoop animate={isLoading}>

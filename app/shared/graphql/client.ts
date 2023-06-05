@@ -18,6 +18,7 @@ const getAuthLink = (
 ): ApolloLink =>
   setContext(async (_, { headers }) => {
     const { accessToken } = await getCredentials();
+    console.log('fetch');
 
     // return the headers to the context so httpLink can read them
     return {
@@ -76,4 +77,9 @@ export function createAuthApolloLink(
 export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: httpLink,
+  defaultOptions: {
+    query: {
+      fetchPolicy: 'cache-first',
+    },
+  },
 });

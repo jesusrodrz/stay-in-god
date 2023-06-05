@@ -20,8 +20,6 @@ export default function OnboardingLoadingScreen() {
       id: user.sub,
     },
     onCompleted: data => {
-      console.log('fetch');
-
       const userData = data.users_by_pk;
       if (!userData) {
         Toast.show({

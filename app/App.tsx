@@ -20,17 +20,33 @@ import WelcomeScreen from '@app/screens/WelcomeScreen';
 import { navigationTheme, theme } from '@app/shared/theme/theme';
 import FillProfileScreen from '@app/modules/onboarding/FillProfileScreen';
 import OnboardingLoadingScreen from '@app/modules/onboarding/OnboardinLoadingScreen';
+import { Auth0User } from '@app/types/helpers-types';
+import { UserDocument } from '@app/types/generated/graphql';
 
 function InnerApp(): JSX.Element {
-  const { user, clearCredentials, getCredentials, isLoading } = useAuth0();
-
+  const { getCredentials, isLoading, ...auth } = useAuth0();
+  const user = auth.user as Auth0User;
   const isAuthenticated = Boolean(user);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      apolloClient.setLink(createAuthApolloLink(getCredentials));
+    apolloClient.setLink(createAuthApolloLink(getCredentials));
+  }, [getCredentials]);
+
+  useEffect(() => {
+    if (user) {
+      apolloClient
+        .query({
+          query: UserDocument,
+          variables: {
+            id: user.sub,
+          },
+          fetchPolicy: 'network-only',
+        })
+        .then(data => {
+          console.log(data);
+        });
     }
-  }, [isAuthenticated, getCredentials, clearCredentials]);
+  }, [user]);
 
   if (isLoading) {
     return <SplashScreen />;
@@ -48,6 +64,9 @@ function InnerApp(): JSX.Element {
           <RootStack.Screen
             name="OnboardingLoading"
             component={OnboardingLoadingScreen}
+            options={{
+              animation: 'none',
+            }}
           />
           <RootStack.Screen name="main" component={MainAppScreen} />
           <RootStack.Screen name="FillProfile" component={FillProfileScreen} />

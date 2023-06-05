@@ -5,6 +5,9 @@ query User($id: String!) {
     first_name
     last_name
     onboarding_completed
+    avatar {
+      url
+    }
   }
 }
 
@@ -20,6 +23,12 @@ subscription UserRealtime($id: String!) {
 
 mutation CreateUser($data: users_insert_input!) {
   insert_users_one(object: $data) {
+    id
+  }
+}
+
+mutation UpdateUser($id: String!, $data: users_set_input) {
+  update_users_by_pk(pk_columns: { id: $id }, _set: $data) {
     id
   }
 }

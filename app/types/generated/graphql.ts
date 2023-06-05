@@ -84,23 +84,218 @@ export enum Cursor_Ordering {
   Desc = 'DESC',
 }
 
+/** columns and relationships of "images" */
+export type Images = {
+  __typename?: 'images';
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  /** An object relationship */
+  user?: Maybe<Users>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregated selection of "images" */
+export type Images_Aggregate = {
+  __typename?: 'images_aggregate';
+  aggregate?: Maybe<Images_Aggregate_Fields>;
+  nodes: Array<Images>;
+};
+
+/** aggregate fields of "images" */
+export type Images_Aggregate_Fields = {
+  __typename?: 'images_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Images_Max_Fields>;
+  min?: Maybe<Images_Min_Fields>;
+};
+
+/** aggregate fields of "images" */
+export type Images_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Images_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "images". All fields are combined with a logical 'AND'. */
+export type Images_Bool_Exp = {
+  _and?: InputMaybe<Array<Images_Bool_Exp>>;
+  _not?: InputMaybe<Images_Bool_Exp>;
+  _or?: InputMaybe<Array<Images_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
+  url?: InputMaybe<String_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "images" */
+export enum Images_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ImagesPkey = 'images_pkey',
+  /** unique or primary key constraint on columns "url" */
+  ImagesUrlKey = 'images_url_key',
+}
+
+/** input type for inserting data into table "images" */
+export type Images_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Images_Max_Fields = {
+  __typename?: 'images_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Images_Min_Fields = {
+  __typename?: 'images_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "images" */
+export type Images_Mutation_Response = {
+  __typename?: 'images_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Images>;
+};
+
+/** input type for inserting object relation for remote table "images" */
+export type Images_Obj_Rel_Insert_Input = {
+  data: Images_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Images_On_Conflict>;
+};
+
+/** on_conflict condition type for table "images" */
+export type Images_On_Conflict = {
+  constraint: Images_Constraint;
+  update_columns?: Array<Images_Update_Column>;
+  where?: InputMaybe<Images_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "images". */
+export type Images_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: images */
+export type Images_Pk_Columns_Input = {
+  id: Scalars['String']['input'];
+};
+
+/** select columns of table "images" */
+export enum Images_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Url = 'url',
+  /** column name */
+  UserId = 'user_id',
+}
+
+/** input type for updating data in table "images" */
+export type Images_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "images" */
+export type Images_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Images_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Images_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "images" */
+export enum Images_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Url = 'url',
+  /** column name */
+  UserId = 'user_id',
+}
+
+export type Images_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Images_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Images_Bool_Exp;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "images" */
+  delete_images?: Maybe<Images_Mutation_Response>;
+  /** delete single row from the table: "images" */
+  delete_images_by_pk?: Maybe<Images>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "images" */
+  insert_images?: Maybe<Images_Mutation_Response>;
+  /** insert a single row into the table: "images" */
+  insert_images_one?: Maybe<Images>;
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "images" */
+  update_images?: Maybe<Images_Mutation_Response>;
+  /** update single row of the table: "images" */
+  update_images_by_pk?: Maybe<Images>;
+  /** update multiples rows of table: "images" */
+  update_images_many?: Maybe<Array<Maybe<Images_Mutation_Response>>>;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_ImagesArgs = {
+  where: Images_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Images_By_PkArgs = {
+  id: Scalars['String']['input'];
 };
 
 /** mutation root */
@@ -114,6 +309,18 @@ export type Mutation_RootDelete_Users_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_ImagesArgs = {
+  objects: Array<Images_Insert_Input>;
+  on_conflict?: InputMaybe<Images_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Images_OneArgs = {
+  object: Images_Insert_Input;
+  on_conflict?: InputMaybe<Images_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_UsersArgs = {
   objects: Array<Users_Insert_Input>;
   on_conflict?: InputMaybe<Users_On_Conflict>;
@@ -123,6 +330,23 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_ImagesArgs = {
+  _set?: InputMaybe<Images_Set_Input>;
+  where: Images_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Images_By_PkArgs = {
+  _set?: InputMaybe<Images_Set_Input>;
+  pk_columns: Images_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Images_ManyArgs = {
+  updates: Array<Images_Updates>;
 };
 
 /** mutation root */
@@ -160,12 +384,38 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "images" */
+  images: Array<Images>;
+  /** fetch aggregated fields from the table: "images" */
+  images_aggregate: Images_Aggregate;
+  /** fetch data from the table: "images" using primary key columns */
+  images_by_pk?: Maybe<Images>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+export type Query_RootImagesArgs = {
+  distinct_on?: InputMaybe<Array<Images_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Images_Order_By>>;
+  where?: InputMaybe<Images_Bool_Exp>;
+};
+
+export type Query_RootImages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Images_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Images_Order_By>>;
+  where?: InputMaybe<Images_Bool_Exp>;
+};
+
+export type Query_RootImages_By_PkArgs = {
+  id: Scalars['String']['input'];
 };
 
 export type Query_RootUsersArgs = {
@@ -190,6 +440,14 @@ export type Query_RootUsers_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "images" */
+  images: Array<Images>;
+  /** fetch aggregated fields from the table: "images" */
+  images_aggregate: Images_Aggregate;
+  /** fetch data from the table: "images" using primary key columns */
+  images_by_pk?: Maybe<Images>;
+  /** fetch data from the table in a streaming manner: "images" */
+  images_stream: Array<Images>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -198,6 +456,32 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+};
+
+export type Subscription_RootImagesArgs = {
+  distinct_on?: InputMaybe<Array<Images_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Images_Order_By>>;
+  where?: InputMaybe<Images_Bool_Exp>;
+};
+
+export type Subscription_RootImages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Images_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Images_Order_By>>;
+  where?: InputMaybe<Images_Bool_Exp>;
+};
+
+export type Subscription_RootImages_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type Subscription_RootImages_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Images_Stream_Cursor_Input>>;
+  where?: InputMaybe<Images_Bool_Exp>;
 };
 
 export type Subscription_RootUsersArgs = {
@@ -242,10 +526,13 @@ export type Timestamptz_Comparison_Exp = {
 /** Table for app users */
 export type Users = {
   __typename?: 'users';
+  /** An object relationship */
+  avatar?: Maybe<Images>;
   created_at: Scalars['timestamptz']['output'];
   email: Scalars['String']['output'];
   first_name: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  image_id?: Maybe<Scalars['String']['output']>;
   last_login: Scalars['timestamptz']['output'];
   last_name: Scalars['String']['output'];
   onboarding_completed: Scalars['Boolean']['output'];
@@ -278,10 +565,12 @@ export type Users_Bool_Exp = {
   _and?: InputMaybe<Array<Users_Bool_Exp>>;
   _not?: InputMaybe<Users_Bool_Exp>;
   _or?: InputMaybe<Array<Users_Bool_Exp>>;
+  avatar?: InputMaybe<Images_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
   first_name?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
+  image_id?: InputMaybe<String_Comparison_Exp>;
   last_login?: InputMaybe<Timestamptz_Comparison_Exp>;
   last_name?: InputMaybe<String_Comparison_Exp>;
   onboarding_completed?: InputMaybe<Boolean_Comparison_Exp>;
@@ -298,10 +587,12 @@ export enum Users_Constraint {
 
 /** input type for inserting data into table "users" */
 export type Users_Insert_Input = {
+  avatar?: InputMaybe<Images_Obj_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   first_name?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image_id?: InputMaybe<Scalars['String']['input']>;
   last_login?: InputMaybe<Scalars['timestamptz']['input']>;
   last_name?: InputMaybe<Scalars['String']['input']>;
   onboarding_completed?: InputMaybe<Scalars['Boolean']['input']>;
@@ -315,6 +606,7 @@ export type Users_Max_Fields = {
   email?: Maybe<Scalars['String']['output']>;
   first_name?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  image_id?: Maybe<Scalars['String']['output']>;
   last_login?: Maybe<Scalars['timestamptz']['output']>;
   last_name?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
@@ -327,6 +619,7 @@ export type Users_Min_Fields = {
   email?: Maybe<Scalars['String']['output']>;
   first_name?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  image_id?: Maybe<Scalars['String']['output']>;
   last_login?: Maybe<Scalars['timestamptz']['output']>;
   last_name?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
@@ -341,6 +634,13 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
 /** on_conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
@@ -350,10 +650,12 @@ export type Users_On_Conflict = {
 
 /** Ordering options when selecting data from "users". */
 export type Users_Order_By = {
+  avatar?: InputMaybe<Images_Order_By>;
   created_at?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
   first_name?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  image_id?: InputMaybe<Order_By>;
   last_login?: InputMaybe<Order_By>;
   last_name?: InputMaybe<Order_By>;
   onboarding_completed?: InputMaybe<Order_By>;
@@ -376,6 +678,8 @@ export enum Users_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  ImageId = 'image_id',
+  /** column name */
   LastLogin = 'last_login',
   /** column name */
   LastName = 'last_name',
@@ -391,6 +695,7 @@ export type Users_Set_Input = {
   email?: InputMaybe<Scalars['String']['input']>;
   first_name?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image_id?: InputMaybe<Scalars['String']['input']>;
   last_login?: InputMaybe<Scalars['timestamptz']['input']>;
   last_name?: InputMaybe<Scalars['String']['input']>;
   onboarding_completed?: InputMaybe<Scalars['Boolean']['input']>;
@@ -411,6 +716,7 @@ export type Users_Stream_Cursor_Value_Input = {
   email?: InputMaybe<Scalars['String']['input']>;
   first_name?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  image_id?: InputMaybe<Scalars['String']['input']>;
   last_login?: InputMaybe<Scalars['timestamptz']['input']>;
   last_name?: InputMaybe<Scalars['String']['input']>;
   onboarding_completed?: InputMaybe<Scalars['Boolean']['input']>;
@@ -427,6 +733,8 @@ export enum Users_Update_Column {
   FirstName = 'first_name',
   /** column name */
   Id = 'id',
+  /** column name */
+  ImageId = 'image_id',
   /** column name */
   LastLogin = 'last_login',
   /** column name */
@@ -457,6 +765,7 @@ export type UserQuery = {
     first_name: string;
     last_name: string;
     onboarding_completed: boolean;
+    avatar?: { __typename?: 'images'; url: string } | null;
   } | null;
 };
 
@@ -483,6 +792,16 @@ export type CreateUserMutationVariables = Exact<{
 export type CreateUserMutation = {
   __typename?: 'mutation_root';
   insert_users_one?: { __typename?: 'users'; id: string } | null;
+};
+
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  data?: InputMaybe<Users_Set_Input>;
+}>;
+
+export type UpdateUserMutation = {
+  __typename?: 'mutation_root';
+  update_users_by_pk?: { __typename?: 'users'; id: string } | null;
 };
 
 export const UserDocument = {
@@ -531,6 +850,16 @@ export const UserDocument = {
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'onboarding_completed' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'avatar' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
                 },
               ],
             },
@@ -646,3 +975,76 @@ export const CreateUserDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
+export const UpdateUserDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'UpdateUser' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'data' } },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'users_set_input' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'update_users_by_pk' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'pk_columns' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'id' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'id' },
+                      },
+                    },
+                  ],
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: '_set' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;

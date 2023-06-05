@@ -52,6 +52,17 @@ const themeObject: DeepPartial<Theme> = {
         borderRadius: 10,
       },
     },
+    Input: {
+      defaultProps: {
+        variant: 'rounded',
+        size: 'md',
+      },
+    },
+    Text: {
+      defaultProps: {
+        color: 'gray.600',
+      },
+    },
   },
   fontSizes: {
     // xs: 16,
