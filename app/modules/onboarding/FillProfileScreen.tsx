@@ -88,7 +88,6 @@ export default function FillProfileScreen() {
           <ControlledInput
             name="lastName"
             control={control}
-            // placeholder="Apellido"
             label="Apellido"
             containerProps={{
               style: styles.inputContainer,
@@ -97,19 +96,13 @@ export default function FillProfileScreen() {
           <ControlledDatetimeInput
             name="birthDate"
             control={control}
-            // placeholder="Apellido"
             label="Fecha de nacimiento"
             containerProps={{
               style: styles.inputContainer,
             }}
             mode="date"
           />
-          <Button
-            onPress={submit}
-            isLoading={loading}
-            // marginTop="5"
-            marginTop="auto"
-          >
+          <Button onPress={submit} isLoading={loading} marginTop="auto">
             Continuar
           </Button>
         </VStack>
