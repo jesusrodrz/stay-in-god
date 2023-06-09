@@ -7,9 +7,7 @@ import {
 } from '@app/components/forms/Inputs';
 import { MainLogo } from '@app/components/logos/Logos';
 import { useUpdateProfileForm } from '@app/modules/onboarding/onboardin-hooks';
-import { UpdateProfileSchemaType } from '@app/modules/onboarding/onboarding-validators';
 import { RootStackParamList } from '@app/navigators/main-navigators';
-import { useMutationPromise } from '@app/shared/hooks/use-fetch';
 import { UpdateUserDocument } from '@app/types/generated/graphql';
 import { Auth0User } from '@app/types/helpers-types';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
