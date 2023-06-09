@@ -27,6 +27,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
+  date: { input: any; output: any };
   timestamptz: { input: any; output: any };
 };
 
@@ -84,11 +85,26 @@ export enum Cursor_Ordering {
   Desc = 'DESC',
 }
 
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['date']['input']>;
+  _gt?: InputMaybe<Scalars['date']['input']>;
+  _gte?: InputMaybe<Scalars['date']['input']>;
+  _in?: InputMaybe<Array<Scalars['date']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['date']['input']>;
+  _lte?: InputMaybe<Scalars['date']['input']>;
+  _neq?: InputMaybe<Scalars['date']['input']>;
+  _nin?: InputMaybe<Array<Scalars['date']['input']>>;
+};
+
 /** columns and relationships of "images" */
 export type Images = {
   __typename?: 'images';
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  type: Scalars['String']['output'];
   url: Scalars['String']['output'];
   /** An object relationship */
   user?: Maybe<Users>;
@@ -123,6 +139,8 @@ export type Images_Bool_Exp = {
   _or?: InputMaybe<Array<Images_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  type?: InputMaybe<String_Comparison_Exp>;
   url?: InputMaybe<String_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
@@ -140,6 +158,8 @@ export enum Images_Constraint {
 export type Images_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['String']['input']>;
@@ -150,6 +170,8 @@ export type Images_Max_Fields = {
   __typename?: 'images_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
 };
@@ -159,6 +181,8 @@ export type Images_Min_Fields = {
   __typename?: 'images_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
 };
@@ -190,6 +214,8 @@ export type Images_On_Conflict = {
 export type Images_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
   url?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -207,6 +233,10 @@ export enum Images_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Name = 'name',
+  /** column name */
+  Type = 'type',
+  /** column name */
   Url = 'url',
   /** column name */
   UserId = 'user_id',
@@ -216,6 +246,8 @@ export enum Images_Select_Column {
 export type Images_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
 };
@@ -232,6 +264,8 @@ export type Images_Stream_Cursor_Input = {
 export type Images_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
 };
@@ -242,6 +276,10 @@ export enum Images_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Type = 'type',
   /** column name */
   Url = 'url',
   /** column name */
@@ -528,6 +566,7 @@ export type Users = {
   __typename?: 'users';
   /** An object relationship */
   avatar?: Maybe<Images>;
+  birth_date?: Maybe<Scalars['date']['output']>;
   created_at: Scalars['timestamptz']['output'];
   email: Scalars['String']['output'];
   first_name: Scalars['String']['output'];
@@ -566,6 +605,7 @@ export type Users_Bool_Exp = {
   _not?: InputMaybe<Users_Bool_Exp>;
   _or?: InputMaybe<Array<Users_Bool_Exp>>;
   avatar?: InputMaybe<Images_Bool_Exp>;
+  birth_date?: InputMaybe<Date_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
   first_name?: InputMaybe<String_Comparison_Exp>;
@@ -588,6 +628,7 @@ export enum Users_Constraint {
 /** input type for inserting data into table "users" */
 export type Users_Insert_Input = {
   avatar?: InputMaybe<Images_Obj_Rel_Insert_Input>;
+  birth_date?: InputMaybe<Scalars['date']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   first_name?: InputMaybe<Scalars['String']['input']>;
@@ -602,6 +643,7 @@ export type Users_Insert_Input = {
 /** aggregate max on columns */
 export type Users_Max_Fields = {
   __typename?: 'users_max_fields';
+  birth_date?: Maybe<Scalars['date']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   first_name?: Maybe<Scalars['String']['output']>;
@@ -615,6 +657,7 @@ export type Users_Max_Fields = {
 /** aggregate min on columns */
 export type Users_Min_Fields = {
   __typename?: 'users_min_fields';
+  birth_date?: Maybe<Scalars['date']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   first_name?: Maybe<Scalars['String']['output']>;
@@ -651,6 +694,7 @@ export type Users_On_Conflict = {
 /** Ordering options when selecting data from "users". */
 export type Users_Order_By = {
   avatar?: InputMaybe<Images_Order_By>;
+  birth_date?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
   first_name?: InputMaybe<Order_By>;
@@ -669,6 +713,8 @@ export type Users_Pk_Columns_Input = {
 
 /** select columns of table "users" */
 export enum Users_Select_Column {
+  /** column name */
+  BirthDate = 'birth_date',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -691,6 +737,7 @@ export enum Users_Select_Column {
 
 /** input type for updating data in table "users" */
 export type Users_Set_Input = {
+  birth_date?: InputMaybe<Scalars['date']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   first_name?: InputMaybe<Scalars['String']['input']>;
@@ -712,6 +759,7 @@ export type Users_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Users_Stream_Cursor_Value_Input = {
+  birth_date?: InputMaybe<Scalars['date']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   first_name?: InputMaybe<Scalars['String']['input']>;
@@ -725,6 +773,8 @@ export type Users_Stream_Cursor_Value_Input = {
 
 /** update columns of table "users" */
 export enum Users_Update_Column {
+  /** column name */
+  BirthDate = 'birth_date',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -750,6 +800,15 @@ export type Users_Updates = {
   _set?: InputMaybe<Users_Set_Input>;
   /** filter the rows which have to be updated */
   where: Users_Bool_Exp;
+};
+
+export type SaveImageMutationVariables = Exact<{
+  data: Images_Insert_Input;
+}>;
+
+export type SaveImageMutation = {
+  __typename?: 'mutation_root';
+  insert_images_one?: { __typename?: 'images'; id: string; url: string } | null;
 };
 
 export type UserQueryVariables = Exact<{
@@ -804,6 +863,55 @@ export type UpdateUserMutation = {
   update_users_by_pk?: { __typename?: 'users'; id: string } | null;
 };
 
+export const SaveImageDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'SaveImage' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'data' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'images_insert_input' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'insert_images_one' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'object' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'data' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SaveImageMutation, SaveImageMutationVariables>;
 export const UserDocument = {
   kind: 'Document',
   definitions: [

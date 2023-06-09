@@ -1,0 +1,6 @@
+mutation SaveImage($data: images_insert_input!) {
+  insert_images_one(object: $data) {
+    id
+    url
+  }
+}

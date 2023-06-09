@@ -12,18 +12,13 @@ import { NativeBaseProvider } from 'native-base';
 import { apolloClient, createAuthApolloLink } from './shared/graphql/client';
 import { ApolloProvider } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
-import ProfileScreen from '@app/modules/profile/ProfileScreen';
 import SplashScreen from '@app/screens/SplashScreen';
-import { RootStack } from '@app/navigators/main-navigators';
 import MainAppScreen from '@app/screens/MainAppScreen';
-import WelcomeScreen from '@app/screens/WelcomeScreen';
 import { navigationTheme, theme } from '@app/shared/theme/theme';
-import FillProfileScreen from '@app/modules/onboarding/FillProfileScreen';
-import OnboardingLoadingScreen from '@app/modules/onboarding/OnboardinLoadingScreen';
 import { Auth0User } from '@app/types/helpers-types';
 import { UserDocument } from '@app/types/generated/graphql';
 
-function InnerApp(): JSX.Element {
+function App(): JSX.Element {
   const { getCredentials, isLoading, ...auth } = useAuth0();
   const user = auth.user as Auth0User;
   const isAuthenticated = Boolean(user);
@@ -52,46 +47,16 @@ function InnerApp(): JSX.Element {
     return <SplashScreen />;
   }
 
-  return (
-    <RootStack.Navigator
-      screenOptions={{
-        headerShown: false,
-        animation: 'fade_from_bottom',
-      }}
-    >
-      {isAuthenticated ? (
-        <>
-          <RootStack.Screen
-            name="OnboardingLoading"
-            component={OnboardingLoadingScreen}
-            options={{
-              animation: 'none',
-            }}
-          />
-          <RootStack.Screen name="main" component={MainAppScreen} />
-          <RootStack.Screen name="FillProfile" component={FillProfileScreen} />
-          <RootStack.Screen
-            name="profile"
-            component={ProfileScreen}
-            options={{
-              animation: 'slide_from_right',
-            }}
-          />
-        </>
-      ) : (
-        <RootStack.Screen name="welcome" component={WelcomeScreen} />
-      )}
-    </RootStack.Navigator>
-  );
+  return <MainAppScreen authenticated={isAuthenticated} />;
 }
 
-function App(): JSX.Element {
+function AppWithProviders(): JSX.Element {
   return (
     <NativeBaseProvider theme={theme}>
       <Auth0Provider clientId={AUTH0_CLIENT_ID} domain={AUTH0_DOMAIN}>
         <ApolloProvider client={apolloClient}>
           <NavigationContainer theme={navigationTheme}>
-            <InnerApp />
+            <App />
           </NavigationContainer>
         </ApolloProvider>
       </Auth0Provider>
@@ -99,4 +64,4 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+export default AppWithProviders;

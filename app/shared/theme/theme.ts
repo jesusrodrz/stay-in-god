@@ -54,8 +54,12 @@ const themeObject: DeepPartial<Theme> = {
     },
     Input: {
       defaultProps: {
-        variant: 'rounded',
+        // variant: 'filled',
         size: 'md',
+      },
+      variants: {},
+      baseStyle: {
+        borderRadius: 10,
       },
     },
     Text: {
@@ -80,5 +84,6 @@ export const navigationTheme: NavigationTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: themeObject.colors?.primary?.[400] as string,
+    background: themeObject.colors?.white as string,
   },
 };

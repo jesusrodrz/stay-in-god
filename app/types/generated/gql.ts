@@ -13,6 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+  'mutation SaveImage($data: images_insert_input!) {\n  insert_images_one(object: $data) {\n    id\n    url\n  }\n}':
+    types.SaveImageDocument,
   'query User($id: String!) {\n  users_by_pk(id: $id) {\n    id\n    email\n    first_name\n    last_name\n    onboarding_completed\n    avatar {\n      url\n    }\n  }\n}\n\nsubscription UserRealtime($id: String!) {\n  users_by_pk(id: $id) {\n    id\n    email\n    first_name\n    last_name\n    onboarding_completed\n  }\n}\n\nmutation CreateUser($data: users_insert_input!) {\n  insert_users_one(object: $data) {\n    id\n  }\n}\n\nmutation UpdateUser($id: String!, $data: users_set_input) {\n  update_users_by_pk(pk_columns: {id: $id}, _set: $data) {\n    id\n  }\n}':
     types.UserDocument,
 };
@@ -31,6 +33,12 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: 'mutation SaveImage($data: images_insert_input!) {\n  insert_images_one(object: $data) {\n    id\n    url\n  }\n}',
+): (typeof documents)['mutation SaveImage($data: images_insert_input!) {\n  insert_images_one(object: $data) {\n    id\n    url\n  }\n}'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

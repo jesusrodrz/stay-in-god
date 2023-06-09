@@ -1,18 +1,19 @@
 import { useMutation } from '@apollo/client';
 import { ScreenContainer } from '@app/components/containers/ScreensContainers';
-import { ControlledInput } from '@app/components/forms/Inputs';
+import AvatarPicker from '@app/components/forms/AvatarPicker';
+import {
+  ControlledDatetimeInput,
+  ControlledInput,
+} from '@app/components/forms/Inputs';
 import { MainLogo } from '@app/components/logos/Logos';
 import { useUpdateProfileForm } from '@app/modules/onboarding/onboardin-hooks';
+import { UpdateProfileSchemaType } from '@app/modules/onboarding/onboarding-validators';
 import { RootStackParamList } from '@app/navigators/main-navigators';
+import { useMutationPromise } from '@app/shared/hooks/use-fetch';
 import { UpdateUserDocument } from '@app/types/generated/graphql';
+import { Auth0User } from '@app/types/helpers-types';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import {
-  Box,
-  Button,
-  Heading,
-  KeyboardAvoidingView,
-  VStack,
-} from 'native-base';
+import { Box, Button, KeyboardAvoidingView, VStack } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { useAuth0 } from 'react-native-auth0';
 
@@ -24,13 +25,17 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   inputContainer: {
-    minWidth: 250,
+    minWidth: '100%',
   },
 });
 
+const VIEW_TOP_RADIOS = 30;
 export default function FillProfileScreen() {
   const navigate = useNavigation<NavigationProp<RootStackParamList>>();
-  const { user } = useAuth0();
+  const auth = useAuth0();
+
+  const user = auth.user as Auth0User;
+
   const { control, handleSubmit } = useUpdateProfileForm();
   const [update, { loading }] = useMutation(UpdateUserDocument, {
     onCompleted: () => {
@@ -44,51 +49,69 @@ export default function FillProfileScreen() {
         data: {
           first_name: data.firstName,
           last_name: data.lastName,
-          onboarding_completed: true,
+          birth_date: data.birthDate,
+          image_id: data.profilePhoto?.id,
         },
       },
     });
   });
+
   return (
     <ScreenContainer
-      background="primary.400"
+      background="white"
+      // background="primary.400"
       justifyContent="center"
       alignItems="center"
+      borderTopRightRadius={VIEW_TOP_RADIOS}
+      borderTopLeftRadius={VIEW_TOP_RADIOS}
+      marginTop={2}
     >
-      <KeyboardAvoidingView behavior="position" width={'80%'} height={'80%'}>
+      <KeyboardAvoidingView behavior="position" width={'80%'}>
         <VStack
           background="white"
           alignItems="center"
           style={styles.card}
-          padding={10}
           space={5}
-          paddingTop={79}
         >
           <MainLogo size={150} />
-
-          <Box margin="auto" />
+          <Box marginTop="auto" />
           <VStack>
-            <Heading color="primary.400" textAlign="center">
-              Completar informacion
-            </Heading>
+            <AvatarPicker size={100} control={control} name="profilePhoto" />
           </VStack>
           <ControlledInput
             name="firstName"
             control={control}
-            placeholder="Nombre"
+            label="Nombre"
             containerProps={{
               style: styles.inputContainer,
             }}
           />
+
           <ControlledInput
             name="lastName"
             control={control}
-            placeholder="Apellido"
+            // placeholder="Apellido"
+            label="Apellido"
             containerProps={{
               style: styles.inputContainer,
             }}
           />
-          <Button onPress={submit} isLoading={loading}>
+          <ControlledDatetimeInput
+            name="birthDate"
+            control={control}
+            // placeholder="Apellido"
+            label="Fecha de nacimiento"
+            containerProps={{
+              style: styles.inputContainer,
+            }}
+            mode="date"
+          />
+          <Button
+            onPress={submit}
+            isLoading={loading}
+            // marginTop="5"
+            marginTop="auto"
+          >
             Continuar
           </Button>
         </VStack>
