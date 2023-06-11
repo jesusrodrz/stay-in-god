@@ -38,7 +38,10 @@ export default function MainAppScreen({
         animation: 'fade_from_bottom',
         headerStyle: styles.header,
         headerTitleStyle: styles.headerTitle,
-        // statusBarStyle:
+        // statusBarStyle:co
+        contentStyle: {
+          backgroundColor: '#fff',
+        },
       }}
     >
       {authenticated ? (

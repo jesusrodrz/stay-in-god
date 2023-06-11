@@ -32,3 +32,11 @@ mutation UpdateUser($id: String!, $data: users_set_input) {
     id
   }
 }
+
+mutation InsertBooks($books: [bible_books_insert_input!]!) {
+  insert_bible_books(objects: $books) {
+    returning {
+      id
+    }
+  }
+}

@@ -49,6 +49,7 @@ export default function FillProfileScreen() {
           last_name: data.lastName,
           birth_date: data.birthDate,
           image_id: data.profilePhoto?.id,
+          onboarding_completed: true,
         },
       },
     });

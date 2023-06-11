@@ -29,6 +29,7 @@ export type Scalars = {
   Float: { input: number; output: number };
   date: { input: any; output: any };
   timestamptz: { input: any; output: any };
+  uuid: { input: any; output: any };
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -42,6 +43,19 @@ export type Boolean_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['Boolean']['input']>;
   _neq?: InputMaybe<Scalars['Boolean']['input']>;
   _nin?: InputMaybe<Array<Scalars['Boolean']['input']>>;
+};
+
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Int']['input']>;
+  _gt?: InputMaybe<Scalars['Int']['input']>;
+  _gte?: InputMaybe<Scalars['Int']['input']>;
+  _in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['Int']['input']>;
+  _lte?: InputMaybe<Scalars['Int']['input']>;
+  _neq?: InputMaybe<Scalars['Int']['input']>;
+  _nin?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -77,6 +91,842 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** columns and relationships of "bible_books" */
+export type Bible_Books = {
+  __typename?: 'bible_books';
+  abbreviation: Scalars['String']['output'];
+  /** An array relationship */
+  chapters: Array<Bible_Chapter>;
+  /** An aggregate relationship */
+  chapters_aggregate: Bible_Chapter_Aggregate;
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  name_long: Scalars['String']['output'];
+  order: Scalars['Int']['output'];
+  testament: Scalars['String']['output'];
+  updated_at: Scalars['timestamptz']['output'];
+};
+
+/** columns and relationships of "bible_books" */
+export type Bible_BooksChaptersArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Chapter_Order_By>>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+/** columns and relationships of "bible_books" */
+export type Bible_BooksChapters_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Chapter_Order_By>>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+/** aggregated selection of "bible_books" */
+export type Bible_Books_Aggregate = {
+  __typename?: 'bible_books_aggregate';
+  aggregate?: Maybe<Bible_Books_Aggregate_Fields>;
+  nodes: Array<Bible_Books>;
+};
+
+/** aggregate fields of "bible_books" */
+export type Bible_Books_Aggregate_Fields = {
+  __typename?: 'bible_books_aggregate_fields';
+  avg?: Maybe<Bible_Books_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Bible_Books_Max_Fields>;
+  min?: Maybe<Bible_Books_Min_Fields>;
+  stddev?: Maybe<Bible_Books_Stddev_Fields>;
+  stddev_pop?: Maybe<Bible_Books_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Bible_Books_Stddev_Samp_Fields>;
+  sum?: Maybe<Bible_Books_Sum_Fields>;
+  var_pop?: Maybe<Bible_Books_Var_Pop_Fields>;
+  var_samp?: Maybe<Bible_Books_Var_Samp_Fields>;
+  variance?: Maybe<Bible_Books_Variance_Fields>;
+};
+
+/** aggregate fields of "bible_books" */
+export type Bible_Books_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Bible_Books_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Bible_Books_Avg_Fields = {
+  __typename?: 'bible_books_avg_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "bible_books". All fields are combined with a logical 'AND'. */
+export type Bible_Books_Bool_Exp = {
+  _and?: InputMaybe<Array<Bible_Books_Bool_Exp>>;
+  _not?: InputMaybe<Bible_Books_Bool_Exp>;
+  _or?: InputMaybe<Array<Bible_Books_Bool_Exp>>;
+  abbreviation?: InputMaybe<String_Comparison_Exp>;
+  chapters?: InputMaybe<Bible_Chapter_Bool_Exp>;
+  chapters_aggregate?: InputMaybe<Bible_Chapter_Aggregate_Bool_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  name_long?: InputMaybe<String_Comparison_Exp>;
+  order?: InputMaybe<Int_Comparison_Exp>;
+  testament?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "bible_books" */
+export enum Bible_Books_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BibleBooksPkey = 'bible_books_pkey',
+}
+
+/** input type for incrementing numeric columns in table "bible_books" */
+export type Bible_Books_Inc_Input = {
+  order?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "bible_books" */
+export type Bible_Books_Insert_Input = {
+  abbreviation?: InputMaybe<Scalars['String']['input']>;
+  chapters?: InputMaybe<Bible_Chapter_Arr_Rel_Insert_Input>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  name_long?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  testament?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate max on columns */
+export type Bible_Books_Max_Fields = {
+  __typename?: 'bible_books_max_fields';
+  abbreviation?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  name_long?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
+  testament?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** aggregate min on columns */
+export type Bible_Books_Min_Fields = {
+  __typename?: 'bible_books_min_fields';
+  abbreviation?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  name_long?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
+  testament?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** response of any mutation on the table "bible_books" */
+export type Bible_Books_Mutation_Response = {
+  __typename?: 'bible_books_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Bible_Books>;
+};
+
+/** input type for inserting object relation for remote table "bible_books" */
+export type Bible_Books_Obj_Rel_Insert_Input = {
+  data: Bible_Books_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Bible_Books_On_Conflict>;
+};
+
+/** on_conflict condition type for table "bible_books" */
+export type Bible_Books_On_Conflict = {
+  constraint: Bible_Books_Constraint;
+  update_columns?: Array<Bible_Books_Update_Column>;
+  where?: InputMaybe<Bible_Books_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "bible_books". */
+export type Bible_Books_Order_By = {
+  abbreviation?: InputMaybe<Order_By>;
+  chapters_aggregate?: InputMaybe<Bible_Chapter_Aggregate_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  name_long?: InputMaybe<Order_By>;
+  order?: InputMaybe<Order_By>;
+  testament?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: bible_books */
+export type Bible_Books_Pk_Columns_Input = {
+  id: Scalars['String']['input'];
+};
+
+/** select columns of table "bible_books" */
+export enum Bible_Books_Select_Column {
+  /** column name */
+  Abbreviation = 'abbreviation',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  NameLong = 'name_long',
+  /** column name */
+  Order = 'order',
+  /** column name */
+  Testament = 'testament',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "bible_books" */
+export type Bible_Books_Set_Input = {
+  abbreviation?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  name_long?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  testament?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Bible_Books_Stddev_Fields = {
+  __typename?: 'bible_books_stddev_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Bible_Books_Stddev_Pop_Fields = {
+  __typename?: 'bible_books_stddev_pop_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Bible_Books_Stddev_Samp_Fields = {
+  __typename?: 'bible_books_stddev_samp_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "bible_books" */
+export type Bible_Books_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Bible_Books_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Bible_Books_Stream_Cursor_Value_Input = {
+  abbreviation?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  name_long?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  testament?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Bible_Books_Sum_Fields = {
+  __typename?: 'bible_books_sum_fields';
+  order?: Maybe<Scalars['Int']['output']>;
+};
+
+/** update columns of table "bible_books" */
+export enum Bible_Books_Update_Column {
+  /** column name */
+  Abbreviation = 'abbreviation',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  NameLong = 'name_long',
+  /** column name */
+  Order = 'order',
+  /** column name */
+  Testament = 'testament',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+export type Bible_Books_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Bible_Books_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Bible_Books_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Bible_Books_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Bible_Books_Var_Pop_Fields = {
+  __typename?: 'bible_books_var_pop_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Bible_Books_Var_Samp_Fields = {
+  __typename?: 'bible_books_var_samp_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Bible_Books_Variance_Fields = {
+  __typename?: 'bible_books_variance_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+};
+
+/** columns and relationships of "bible_chapter" */
+export type Bible_Chapter = {
+  __typename?: 'bible_chapter';
+  book_id: Scalars['String']['output'];
+  /** An object relationship */
+  chapter: Bible_Books;
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['String']['output'];
+  order: Scalars['Int']['output'];
+  updated_at: Scalars['timestamptz']['output'];
+  verses_count: Scalars['Int']['output'];
+};
+
+/** aggregated selection of "bible_chapter" */
+export type Bible_Chapter_Aggregate = {
+  __typename?: 'bible_chapter_aggregate';
+  aggregate?: Maybe<Bible_Chapter_Aggregate_Fields>;
+  nodes: Array<Bible_Chapter>;
+};
+
+export type Bible_Chapter_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Bible_Chapter_Aggregate_Bool_Exp_Count>;
+};
+
+export type Bible_Chapter_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Bible_Chapter_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "bible_chapter" */
+export type Bible_Chapter_Aggregate_Fields = {
+  __typename?: 'bible_chapter_aggregate_fields';
+  avg?: Maybe<Bible_Chapter_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Bible_Chapter_Max_Fields>;
+  min?: Maybe<Bible_Chapter_Min_Fields>;
+  stddev?: Maybe<Bible_Chapter_Stddev_Fields>;
+  stddev_pop?: Maybe<Bible_Chapter_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Bible_Chapter_Stddev_Samp_Fields>;
+  sum?: Maybe<Bible_Chapter_Sum_Fields>;
+  var_pop?: Maybe<Bible_Chapter_Var_Pop_Fields>;
+  var_samp?: Maybe<Bible_Chapter_Var_Samp_Fields>;
+  variance?: Maybe<Bible_Chapter_Variance_Fields>;
+};
+
+/** aggregate fields of "bible_chapter" */
+export type Bible_Chapter_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** order by aggregate values of table "bible_chapter" */
+export type Bible_Chapter_Aggregate_Order_By = {
+  avg?: InputMaybe<Bible_Chapter_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Bible_Chapter_Max_Order_By>;
+  min?: InputMaybe<Bible_Chapter_Min_Order_By>;
+  stddev?: InputMaybe<Bible_Chapter_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Bible_Chapter_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Bible_Chapter_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Bible_Chapter_Sum_Order_By>;
+  var_pop?: InputMaybe<Bible_Chapter_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Bible_Chapter_Var_Samp_Order_By>;
+  variance?: InputMaybe<Bible_Chapter_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "bible_chapter" */
+export type Bible_Chapter_Arr_Rel_Insert_Input = {
+  data: Array<Bible_Chapter_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Bible_Chapter_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Bible_Chapter_Avg_Fields = {
+  __typename?: 'bible_chapter_avg_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+  verses_count?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "bible_chapter" */
+export type Bible_Chapter_Avg_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "bible_chapter". All fields are combined with a logical 'AND'. */
+export type Bible_Chapter_Bool_Exp = {
+  _and?: InputMaybe<Array<Bible_Chapter_Bool_Exp>>;
+  _not?: InputMaybe<Bible_Chapter_Bool_Exp>;
+  _or?: InputMaybe<Array<Bible_Chapter_Bool_Exp>>;
+  book_id?: InputMaybe<String_Comparison_Exp>;
+  chapter?: InputMaybe<Bible_Books_Bool_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
+  order?: InputMaybe<Int_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  verses_count?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "bible_chapter" */
+export enum Bible_Chapter_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BibleChapterPkey = 'bible_chapter_pkey',
+}
+
+/** input type for incrementing numeric columns in table "bible_chapter" */
+export type Bible_Chapter_Inc_Input = {
+  order?: InputMaybe<Scalars['Int']['input']>;
+  verses_count?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "bible_chapter" */
+export type Bible_Chapter_Insert_Input = {
+  book_id?: InputMaybe<Scalars['String']['input']>;
+  chapter?: InputMaybe<Bible_Books_Obj_Rel_Insert_Input>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  verses_count?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate max on columns */
+export type Bible_Chapter_Max_Fields = {
+  __typename?: 'bible_chapter_max_fields';
+  book_id?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  verses_count?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by max() on columns of table "bible_chapter" */
+export type Bible_Chapter_Max_Order_By = {
+  book_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Bible_Chapter_Min_Fields = {
+  __typename?: 'bible_chapter_min_fields';
+  book_id?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  order?: Maybe<Scalars['Int']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  verses_count?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by min() on columns of table "bible_chapter" */
+export type Bible_Chapter_Min_Order_By = {
+  book_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "bible_chapter" */
+export type Bible_Chapter_Mutation_Response = {
+  __typename?: 'bible_chapter_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Bible_Chapter>;
+};
+
+/** input type for inserting object relation for remote table "bible_chapter" */
+export type Bible_Chapter_Obj_Rel_Insert_Input = {
+  data: Bible_Chapter_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Bible_Chapter_On_Conflict>;
+};
+
+/** on_conflict condition type for table "bible_chapter" */
+export type Bible_Chapter_On_Conflict = {
+  constraint: Bible_Chapter_Constraint;
+  update_columns?: Array<Bible_Chapter_Update_Column>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "bible_chapter". */
+export type Bible_Chapter_Order_By = {
+  book_id?: InputMaybe<Order_By>;
+  chapter?: InputMaybe<Bible_Books_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  order?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: bible_chapter */
+export type Bible_Chapter_Pk_Columns_Input = {
+  id: Scalars['String']['input'];
+};
+
+/** select columns of table "bible_chapter" */
+export enum Bible_Chapter_Select_Column {
+  /** column name */
+  BookId = 'book_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Order = 'order',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  VersesCount = 'verses_count',
+}
+
+/** input type for updating data in table "bible_chapter" */
+export type Bible_Chapter_Set_Input = {
+  book_id?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  verses_count?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Bible_Chapter_Stddev_Fields = {
+  __typename?: 'bible_chapter_stddev_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+  verses_count?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev() on columns of table "bible_chapter" */
+export type Bible_Chapter_Stddev_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Bible_Chapter_Stddev_Pop_Fields = {
+  __typename?: 'bible_chapter_stddev_pop_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+  verses_count?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_pop() on columns of table "bible_chapter" */
+export type Bible_Chapter_Stddev_Pop_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Bible_Chapter_Stddev_Samp_Fields = {
+  __typename?: 'bible_chapter_stddev_samp_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+  verses_count?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "bible_chapter" */
+export type Bible_Chapter_Stddev_Samp_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "bible_chapter" */
+export type Bible_Chapter_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Bible_Chapter_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Bible_Chapter_Stream_Cursor_Value_Input = {
+  book_id?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Int']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  verses_count?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Bible_Chapter_Sum_Fields = {
+  __typename?: 'bible_chapter_sum_fields';
+  order?: Maybe<Scalars['Int']['output']>;
+  verses_count?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by sum() on columns of table "bible_chapter" */
+export type Bible_Chapter_Sum_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "bible_chapter" */
+export enum Bible_Chapter_Update_Column {
+  /** column name */
+  BookId = 'book_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Order = 'order',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  VersesCount = 'verses_count',
+}
+
+export type Bible_Chapter_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Bible_Chapter_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Bible_Chapter_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Bible_Chapter_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Bible_Chapter_Var_Pop_Fields = {
+  __typename?: 'bible_chapter_var_pop_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+  verses_count?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_pop() on columns of table "bible_chapter" */
+export type Bible_Chapter_Var_Pop_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Bible_Chapter_Var_Samp_Fields = {
+  __typename?: 'bible_chapter_var_samp_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+  verses_count?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_samp() on columns of table "bible_chapter" */
+export type Bible_Chapter_Var_Samp_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Bible_Chapter_Variance_Fields = {
+  __typename?: 'bible_chapter_variance_fields';
+  order?: Maybe<Scalars['Float']['output']>;
+  verses_count?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "bible_chapter" */
+export type Bible_Chapter_Variance_Order_By = {
+  order?: InputMaybe<Order_By>;
+  verses_count?: InputMaybe<Order_By>;
+};
+
+/** columns and relationships of "bibles" */
+export type Bibles = {
+  __typename?: 'bibles';
+  abbreviation: Scalars['String']['output'];
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updated_at: Scalars['timestamptz']['output'];
+};
+
+/** aggregated selection of "bibles" */
+export type Bibles_Aggregate = {
+  __typename?: 'bibles_aggregate';
+  aggregate?: Maybe<Bibles_Aggregate_Fields>;
+  nodes: Array<Bibles>;
+};
+
+/** aggregate fields of "bibles" */
+export type Bibles_Aggregate_Fields = {
+  __typename?: 'bibles_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Bibles_Max_Fields>;
+  min?: Maybe<Bibles_Min_Fields>;
+};
+
+/** aggregate fields of "bibles" */
+export type Bibles_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Bibles_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "bibles". All fields are combined with a logical 'AND'. */
+export type Bibles_Bool_Exp = {
+  _and?: InputMaybe<Array<Bibles_Bool_Exp>>;
+  _not?: InputMaybe<Bibles_Bool_Exp>;
+  _or?: InputMaybe<Array<Bibles_Bool_Exp>>;
+  abbreviation?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "bibles" */
+export enum Bibles_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BiblesPkey = 'bibles_pkey',
+}
+
+/** input type for inserting data into table "bibles" */
+export type Bibles_Insert_Input = {
+  abbreviation?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate max on columns */
+export type Bibles_Max_Fields = {
+  __typename?: 'bibles_max_fields';
+  abbreviation?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** aggregate min on columns */
+export type Bibles_Min_Fields = {
+  __typename?: 'bibles_min_fields';
+  abbreviation?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** response of any mutation on the table "bibles" */
+export type Bibles_Mutation_Response = {
+  __typename?: 'bibles_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Bibles>;
+};
+
+/** on_conflict condition type for table "bibles" */
+export type Bibles_On_Conflict = {
+  constraint: Bibles_Constraint;
+  update_columns?: Array<Bibles_Update_Column>;
+  where?: InputMaybe<Bibles_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "bibles". */
+export type Bibles_Order_By = {
+  abbreviation?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: bibles */
+export type Bibles_Pk_Columns_Input = {
+  id: Scalars['String']['input'];
+};
+
+/** select columns of table "bibles" */
+export enum Bibles_Select_Column {
+  /** column name */
+  Abbreviation = 'abbreviation',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "bibles" */
+export type Bibles_Set_Input = {
+  abbreviation?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** Streaming cursor of the table "bibles" */
+export type Bibles_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Bibles_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Bibles_Stream_Cursor_Value_Input = {
+  abbreviation?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** update columns of table "bibles" */
+export enum Bibles_Update_Column {
+  /** column name */
+  Abbreviation = 'abbreviation',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+export type Bibles_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Bibles_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Bibles_Bool_Exp;
+};
+
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -96,6 +946,293 @@ export type Date_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['date']['input']>;
   _neq?: InputMaybe<Scalars['date']['input']>;
   _nin?: InputMaybe<Array<Scalars['date']['input']>>;
+};
+
+/** columns and relationships of "devotional" */
+export type Devotional = {
+  __typename?: 'devotional';
+  /** An object relationship */
+  book: Bible_Books;
+  book_id: Scalars['String']['output'];
+  /** An object relationship */
+  chapter: Bible_Chapter;
+  chapter_id: Scalars['String']['output'];
+  created_at: Scalars['timestamptz']['output'];
+  date: Scalars['date']['output'];
+  first_verse: Scalars['Int']['output'];
+  id: Scalars['uuid']['output'];
+  last_verse: Scalars['Int']['output'];
+  updated_at: Scalars['timestamptz']['output'];
+};
+
+/** aggregated selection of "devotional" */
+export type Devotional_Aggregate = {
+  __typename?: 'devotional_aggregate';
+  aggregate?: Maybe<Devotional_Aggregate_Fields>;
+  nodes: Array<Devotional>;
+};
+
+/** aggregate fields of "devotional" */
+export type Devotional_Aggregate_Fields = {
+  __typename?: 'devotional_aggregate_fields';
+  avg?: Maybe<Devotional_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Devotional_Max_Fields>;
+  min?: Maybe<Devotional_Min_Fields>;
+  stddev?: Maybe<Devotional_Stddev_Fields>;
+  stddev_pop?: Maybe<Devotional_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Devotional_Stddev_Samp_Fields>;
+  sum?: Maybe<Devotional_Sum_Fields>;
+  var_pop?: Maybe<Devotional_Var_Pop_Fields>;
+  var_samp?: Maybe<Devotional_Var_Samp_Fields>;
+  variance?: Maybe<Devotional_Variance_Fields>;
+};
+
+/** aggregate fields of "devotional" */
+export type Devotional_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Devotional_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Devotional_Avg_Fields = {
+  __typename?: 'devotional_avg_fields';
+  first_verse?: Maybe<Scalars['Float']['output']>;
+  last_verse?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "devotional". All fields are combined with a logical 'AND'. */
+export type Devotional_Bool_Exp = {
+  _and?: InputMaybe<Array<Devotional_Bool_Exp>>;
+  _not?: InputMaybe<Devotional_Bool_Exp>;
+  _or?: InputMaybe<Array<Devotional_Bool_Exp>>;
+  book?: InputMaybe<Bible_Books_Bool_Exp>;
+  book_id?: InputMaybe<String_Comparison_Exp>;
+  chapter?: InputMaybe<Bible_Chapter_Bool_Exp>;
+  chapter_id?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  date?: InputMaybe<Date_Comparison_Exp>;
+  first_verse?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  last_verse?: InputMaybe<Int_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "devotional" */
+export enum Devotional_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  DevotionalPkey = 'devotional_pkey',
+}
+
+/** input type for incrementing numeric columns in table "devotional" */
+export type Devotional_Inc_Input = {
+  first_verse?: InputMaybe<Scalars['Int']['input']>;
+  last_verse?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "devotional" */
+export type Devotional_Insert_Input = {
+  book?: InputMaybe<Bible_Books_Obj_Rel_Insert_Input>;
+  book_id?: InputMaybe<Scalars['String']['input']>;
+  chapter?: InputMaybe<Bible_Chapter_Obj_Rel_Insert_Input>;
+  chapter_id?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  date?: InputMaybe<Scalars['date']['input']>;
+  first_verse?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  last_verse?: InputMaybe<Scalars['Int']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate max on columns */
+export type Devotional_Max_Fields = {
+  __typename?: 'devotional_max_fields';
+  book_id?: Maybe<Scalars['String']['output']>;
+  chapter_id?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  date?: Maybe<Scalars['date']['output']>;
+  first_verse?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  last_verse?: Maybe<Scalars['Int']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** aggregate min on columns */
+export type Devotional_Min_Fields = {
+  __typename?: 'devotional_min_fields';
+  book_id?: Maybe<Scalars['String']['output']>;
+  chapter_id?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  date?: Maybe<Scalars['date']['output']>;
+  first_verse?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  last_verse?: Maybe<Scalars['Int']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** response of any mutation on the table "devotional" */
+export type Devotional_Mutation_Response = {
+  __typename?: 'devotional_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Devotional>;
+};
+
+/** on_conflict condition type for table "devotional" */
+export type Devotional_On_Conflict = {
+  constraint: Devotional_Constraint;
+  update_columns?: Array<Devotional_Update_Column>;
+  where?: InputMaybe<Devotional_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "devotional". */
+export type Devotional_Order_By = {
+  book?: InputMaybe<Bible_Books_Order_By>;
+  book_id?: InputMaybe<Order_By>;
+  chapter?: InputMaybe<Bible_Chapter_Order_By>;
+  chapter_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  date?: InputMaybe<Order_By>;
+  first_verse?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  last_verse?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: devotional */
+export type Devotional_Pk_Columns_Input = {
+  id: Scalars['uuid']['input'];
+};
+
+/** select columns of table "devotional" */
+export enum Devotional_Select_Column {
+  /** column name */
+  BookId = 'book_id',
+  /** column name */
+  ChapterId = 'chapter_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  FirstVerse = 'first_verse',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  LastVerse = 'last_verse',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "devotional" */
+export type Devotional_Set_Input = {
+  book_id?: InputMaybe<Scalars['String']['input']>;
+  chapter_id?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  date?: InputMaybe<Scalars['date']['input']>;
+  first_verse?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  last_verse?: InputMaybe<Scalars['Int']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Devotional_Stddev_Fields = {
+  __typename?: 'devotional_stddev_fields';
+  first_verse?: Maybe<Scalars['Float']['output']>;
+  last_verse?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Devotional_Stddev_Pop_Fields = {
+  __typename?: 'devotional_stddev_pop_fields';
+  first_verse?: Maybe<Scalars['Float']['output']>;
+  last_verse?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Devotional_Stddev_Samp_Fields = {
+  __typename?: 'devotional_stddev_samp_fields';
+  first_verse?: Maybe<Scalars['Float']['output']>;
+  last_verse?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "devotional" */
+export type Devotional_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Devotional_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Devotional_Stream_Cursor_Value_Input = {
+  book_id?: InputMaybe<Scalars['String']['input']>;
+  chapter_id?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  date?: InputMaybe<Scalars['date']['input']>;
+  first_verse?: InputMaybe<Scalars['Int']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  last_verse?: InputMaybe<Scalars['Int']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Devotional_Sum_Fields = {
+  __typename?: 'devotional_sum_fields';
+  first_verse?: Maybe<Scalars['Int']['output']>;
+  last_verse?: Maybe<Scalars['Int']['output']>;
+};
+
+/** update columns of table "devotional" */
+export enum Devotional_Update_Column {
+  /** column name */
+  BookId = 'book_id',
+  /** column name */
+  ChapterId = 'chapter_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  FirstVerse = 'first_verse',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  LastVerse = 'last_verse',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+export type Devotional_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Devotional_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Devotional_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Devotional_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Devotional_Var_Pop_Fields = {
+  __typename?: 'devotional_var_pop_fields';
+  first_verse?: Maybe<Scalars['Float']['output']>;
+  last_verse?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Devotional_Var_Samp_Fields = {
+  __typename?: 'devotional_var_samp_fields';
+  first_verse?: Maybe<Scalars['Float']['output']>;
+  last_verse?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Devotional_Variance_Fields = {
+  __typename?: 'devotional_variance_fields';
+  first_verse?: Maybe<Scalars['Float']['output']>;
+  last_verse?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "images" */
@@ -296,6 +1433,22 @@ export type Images_Updates = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "bible_books" */
+  delete_bible_books?: Maybe<Bible_Books_Mutation_Response>;
+  /** delete single row from the table: "bible_books" */
+  delete_bible_books_by_pk?: Maybe<Bible_Books>;
+  /** delete data from the table: "bible_chapter" */
+  delete_bible_chapter?: Maybe<Bible_Chapter_Mutation_Response>;
+  /** delete single row from the table: "bible_chapter" */
+  delete_bible_chapter_by_pk?: Maybe<Bible_Chapter>;
+  /** delete data from the table: "bibles" */
+  delete_bibles?: Maybe<Bibles_Mutation_Response>;
+  /** delete single row from the table: "bibles" */
+  delete_bibles_by_pk?: Maybe<Bibles>;
+  /** delete data from the table: "devotional" */
+  delete_devotional?: Maybe<Devotional_Mutation_Response>;
+  /** delete single row from the table: "devotional" */
+  delete_devotional_by_pk?: Maybe<Devotional>;
   /** delete data from the table: "images" */
   delete_images?: Maybe<Images_Mutation_Response>;
   /** delete single row from the table: "images" */
@@ -304,6 +1457,22 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "bible_books" */
+  insert_bible_books?: Maybe<Bible_Books_Mutation_Response>;
+  /** insert a single row into the table: "bible_books" */
+  insert_bible_books_one?: Maybe<Bible_Books>;
+  /** insert data into the table: "bible_chapter" */
+  insert_bible_chapter?: Maybe<Bible_Chapter_Mutation_Response>;
+  /** insert a single row into the table: "bible_chapter" */
+  insert_bible_chapter_one?: Maybe<Bible_Chapter>;
+  /** insert data into the table: "bibles" */
+  insert_bibles?: Maybe<Bibles_Mutation_Response>;
+  /** insert a single row into the table: "bibles" */
+  insert_bibles_one?: Maybe<Bibles>;
+  /** insert data into the table: "devotional" */
+  insert_devotional?: Maybe<Devotional_Mutation_Response>;
+  /** insert a single row into the table: "devotional" */
+  insert_devotional_one?: Maybe<Devotional>;
   /** insert data into the table: "images" */
   insert_images?: Maybe<Images_Mutation_Response>;
   /** insert a single row into the table: "images" */
@@ -312,6 +1481,32 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "bible_books" */
+  update_bible_books?: Maybe<Bible_Books_Mutation_Response>;
+  /** update single row of the table: "bible_books" */
+  update_bible_books_by_pk?: Maybe<Bible_Books>;
+  /** update multiples rows of table: "bible_books" */
+  update_bible_books_many?: Maybe<Array<Maybe<Bible_Books_Mutation_Response>>>;
+  /** update data of the table: "bible_chapter" */
+  update_bible_chapter?: Maybe<Bible_Chapter_Mutation_Response>;
+  /** update single row of the table: "bible_chapter" */
+  update_bible_chapter_by_pk?: Maybe<Bible_Chapter>;
+  /** update multiples rows of table: "bible_chapter" */
+  update_bible_chapter_many?: Maybe<
+    Array<Maybe<Bible_Chapter_Mutation_Response>>
+  >;
+  /** update data of the table: "bibles" */
+  update_bibles?: Maybe<Bibles_Mutation_Response>;
+  /** update single row of the table: "bibles" */
+  update_bibles_by_pk?: Maybe<Bibles>;
+  /** update multiples rows of table: "bibles" */
+  update_bibles_many?: Maybe<Array<Maybe<Bibles_Mutation_Response>>>;
+  /** update data of the table: "devotional" */
+  update_devotional?: Maybe<Devotional_Mutation_Response>;
+  /** update single row of the table: "devotional" */
+  update_devotional_by_pk?: Maybe<Devotional>;
+  /** update multiples rows of table: "devotional" */
+  update_devotional_many?: Maybe<Array<Maybe<Devotional_Mutation_Response>>>;
   /** update data of the table: "images" */
   update_images?: Maybe<Images_Mutation_Response>;
   /** update single row of the table: "images" */
@@ -324,6 +1519,46 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Bible_BooksArgs = {
+  where: Bible_Books_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Bible_Books_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Bible_ChapterArgs = {
+  where: Bible_Chapter_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Bible_Chapter_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_BiblesArgs = {
+  where: Bibles_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Bibles_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_DevotionalArgs = {
+  where: Devotional_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Devotional_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 /** mutation root */
@@ -344,6 +1579,54 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['String']['input'];
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Bible_BooksArgs = {
+  objects: Array<Bible_Books_Insert_Input>;
+  on_conflict?: InputMaybe<Bible_Books_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Bible_Books_OneArgs = {
+  object: Bible_Books_Insert_Input;
+  on_conflict?: InputMaybe<Bible_Books_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Bible_ChapterArgs = {
+  objects: Array<Bible_Chapter_Insert_Input>;
+  on_conflict?: InputMaybe<Bible_Chapter_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Bible_Chapter_OneArgs = {
+  object: Bible_Chapter_Insert_Input;
+  on_conflict?: InputMaybe<Bible_Chapter_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_BiblesArgs = {
+  objects: Array<Bibles_Insert_Input>;
+  on_conflict?: InputMaybe<Bibles_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Bibles_OneArgs = {
+  object: Bibles_Insert_Input;
+  on_conflict?: InputMaybe<Bibles_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_DevotionalArgs = {
+  objects: Array<Devotional_Insert_Input>;
+  on_conflict?: InputMaybe<Devotional_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Devotional_OneArgs = {
+  object: Devotional_Insert_Input;
+  on_conflict?: InputMaybe<Devotional_On_Conflict>;
 };
 
 /** mutation root */
@@ -368,6 +1651,80 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bible_BooksArgs = {
+  _inc?: InputMaybe<Bible_Books_Inc_Input>;
+  _set?: InputMaybe<Bible_Books_Set_Input>;
+  where: Bible_Books_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bible_Books_By_PkArgs = {
+  _inc?: InputMaybe<Bible_Books_Inc_Input>;
+  _set?: InputMaybe<Bible_Books_Set_Input>;
+  pk_columns: Bible_Books_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bible_Books_ManyArgs = {
+  updates: Array<Bible_Books_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bible_ChapterArgs = {
+  _inc?: InputMaybe<Bible_Chapter_Inc_Input>;
+  _set?: InputMaybe<Bible_Chapter_Set_Input>;
+  where: Bible_Chapter_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bible_Chapter_By_PkArgs = {
+  _inc?: InputMaybe<Bible_Chapter_Inc_Input>;
+  _set?: InputMaybe<Bible_Chapter_Set_Input>;
+  pk_columns: Bible_Chapter_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bible_Chapter_ManyArgs = {
+  updates: Array<Bible_Chapter_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_BiblesArgs = {
+  _set?: InputMaybe<Bibles_Set_Input>;
+  where: Bibles_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bibles_By_PkArgs = {
+  _set?: InputMaybe<Bibles_Set_Input>;
+  pk_columns: Bibles_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Bibles_ManyArgs = {
+  updates: Array<Bibles_Updates>;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_DevotionalArgs = {
+  _inc?: InputMaybe<Devotional_Inc_Input>;
+  _set?: InputMaybe<Devotional_Set_Input>;
+  where: Devotional_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Devotional_By_PkArgs = {
+  _inc?: InputMaybe<Devotional_Inc_Input>;
+  _set?: InputMaybe<Devotional_Set_Input>;
+  pk_columns: Devotional_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Devotional_ManyArgs = {
+  updates: Array<Devotional_Updates>;
 };
 
 /** mutation root */
@@ -422,6 +1779,30 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "bible_books" */
+  bible_books: Array<Bible_Books>;
+  /** fetch aggregated fields from the table: "bible_books" */
+  bible_books_aggregate: Bible_Books_Aggregate;
+  /** fetch data from the table: "bible_books" using primary key columns */
+  bible_books_by_pk?: Maybe<Bible_Books>;
+  /** fetch data from the table: "bible_chapter" */
+  bible_chapter: Array<Bible_Chapter>;
+  /** fetch aggregated fields from the table: "bible_chapter" */
+  bible_chapter_aggregate: Bible_Chapter_Aggregate;
+  /** fetch data from the table: "bible_chapter" using primary key columns */
+  bible_chapter_by_pk?: Maybe<Bible_Chapter>;
+  /** fetch data from the table: "bibles" */
+  bibles: Array<Bibles>;
+  /** fetch aggregated fields from the table: "bibles" */
+  bibles_aggregate: Bibles_Aggregate;
+  /** fetch data from the table: "bibles" using primary key columns */
+  bibles_by_pk?: Maybe<Bibles>;
+  /** fetch data from the table: "devotional" */
+  devotional: Array<Devotional>;
+  /** fetch aggregated fields from the table: "devotional" */
+  devotional_aggregate: Devotional_Aggregate;
+  /** fetch data from the table: "devotional" using primary key columns */
+  devotional_by_pk?: Maybe<Devotional>;
   /** fetch data from the table: "images" */
   images: Array<Images>;
   /** fetch aggregated fields from the table: "images" */
@@ -434,6 +1815,86 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+export type Query_RootBible_BooksArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Books_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Books_Order_By>>;
+  where?: InputMaybe<Bible_Books_Bool_Exp>;
+};
+
+export type Query_RootBible_Books_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Books_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Books_Order_By>>;
+  where?: InputMaybe<Bible_Books_Bool_Exp>;
+};
+
+export type Query_RootBible_Books_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type Query_RootBible_ChapterArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Chapter_Order_By>>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+export type Query_RootBible_Chapter_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Chapter_Order_By>>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+export type Query_RootBible_Chapter_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type Query_RootBiblesArgs = {
+  distinct_on?: InputMaybe<Array<Bibles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bibles_Order_By>>;
+  where?: InputMaybe<Bibles_Bool_Exp>;
+};
+
+export type Query_RootBibles_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bibles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bibles_Order_By>>;
+  where?: InputMaybe<Bibles_Bool_Exp>;
+};
+
+export type Query_RootBibles_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type Query_RootDevotionalArgs = {
+  distinct_on?: InputMaybe<Array<Devotional_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Devotional_Order_By>>;
+  where?: InputMaybe<Devotional_Bool_Exp>;
+};
+
+export type Query_RootDevotional_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Devotional_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Devotional_Order_By>>;
+  where?: InputMaybe<Devotional_Bool_Exp>;
+};
+
+export type Query_RootDevotional_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 export type Query_RootImagesArgs = {
@@ -478,6 +1939,38 @@ export type Query_RootUsers_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "bible_books" */
+  bible_books: Array<Bible_Books>;
+  /** fetch aggregated fields from the table: "bible_books" */
+  bible_books_aggregate: Bible_Books_Aggregate;
+  /** fetch data from the table: "bible_books" using primary key columns */
+  bible_books_by_pk?: Maybe<Bible_Books>;
+  /** fetch data from the table in a streaming manner: "bible_books" */
+  bible_books_stream: Array<Bible_Books>;
+  /** fetch data from the table: "bible_chapter" */
+  bible_chapter: Array<Bible_Chapter>;
+  /** fetch aggregated fields from the table: "bible_chapter" */
+  bible_chapter_aggregate: Bible_Chapter_Aggregate;
+  /** fetch data from the table: "bible_chapter" using primary key columns */
+  bible_chapter_by_pk?: Maybe<Bible_Chapter>;
+  /** fetch data from the table in a streaming manner: "bible_chapter" */
+  bible_chapter_stream: Array<Bible_Chapter>;
+  /** fetch data from the table: "bibles" */
+  bibles: Array<Bibles>;
+  /** fetch aggregated fields from the table: "bibles" */
+  bibles_aggregate: Bibles_Aggregate;
+  /** fetch data from the table: "bibles" using primary key columns */
+  bibles_by_pk?: Maybe<Bibles>;
+  /** fetch data from the table in a streaming manner: "bibles" */
+  bibles_stream: Array<Bibles>;
+  /** fetch data from the table: "devotional" */
+  devotional: Array<Devotional>;
+  /** fetch aggregated fields from the table: "devotional" */
+  devotional_aggregate: Devotional_Aggregate;
+  /** fetch data from the table: "devotional" using primary key columns */
+  devotional_by_pk?: Maybe<Devotional>;
+  /** fetch data from the table in a streaming manner: "devotional" */
+  devotional_stream: Array<Devotional>;
   /** fetch data from the table: "images" */
   images: Array<Images>;
   /** fetch aggregated fields from the table: "images" */
@@ -494,6 +1987,110 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+};
+
+export type Subscription_RootBible_BooksArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Books_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Books_Order_By>>;
+  where?: InputMaybe<Bible_Books_Bool_Exp>;
+};
+
+export type Subscription_RootBible_Books_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Books_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Books_Order_By>>;
+  where?: InputMaybe<Bible_Books_Bool_Exp>;
+};
+
+export type Subscription_RootBible_Books_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type Subscription_RootBible_Books_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Bible_Books_Stream_Cursor_Input>>;
+  where?: InputMaybe<Bible_Books_Bool_Exp>;
+};
+
+export type Subscription_RootBible_ChapterArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Chapter_Order_By>>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+export type Subscription_RootBible_Chapter_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bible_Chapter_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bible_Chapter_Order_By>>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+export type Subscription_RootBible_Chapter_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type Subscription_RootBible_Chapter_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Bible_Chapter_Stream_Cursor_Input>>;
+  where?: InputMaybe<Bible_Chapter_Bool_Exp>;
+};
+
+export type Subscription_RootBiblesArgs = {
+  distinct_on?: InputMaybe<Array<Bibles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bibles_Order_By>>;
+  where?: InputMaybe<Bibles_Bool_Exp>;
+};
+
+export type Subscription_RootBibles_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Bibles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Bibles_Order_By>>;
+  where?: InputMaybe<Bibles_Bool_Exp>;
+};
+
+export type Subscription_RootBibles_By_PkArgs = {
+  id: Scalars['String']['input'];
+};
+
+export type Subscription_RootBibles_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Bibles_Stream_Cursor_Input>>;
+  where?: InputMaybe<Bibles_Bool_Exp>;
+};
+
+export type Subscription_RootDevotionalArgs = {
+  distinct_on?: InputMaybe<Array<Devotional_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Devotional_Order_By>>;
+  where?: InputMaybe<Devotional_Bool_Exp>;
+};
+
+export type Subscription_RootDevotional_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Devotional_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Devotional_Order_By>>;
+  where?: InputMaybe<Devotional_Bool_Exp>;
+};
+
+export type Subscription_RootDevotional_By_PkArgs = {
+  id: Scalars['uuid']['input'];
+};
+
+export type Subscription_RootDevotional_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Devotional_Stream_Cursor_Input>>;
+  where?: InputMaybe<Devotional_Bool_Exp>;
 };
 
 export type Subscription_RootImagesArgs = {
@@ -802,6 +2399,19 @@ export type Users_Updates = {
   where: Users_Bool_Exp;
 };
 
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['uuid']['input']>;
+  _gt?: InputMaybe<Scalars['uuid']['input']>;
+  _gte?: InputMaybe<Scalars['uuid']['input']>;
+  _in?: InputMaybe<Array<Scalars['uuid']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['uuid']['input']>;
+  _lte?: InputMaybe<Scalars['uuid']['input']>;
+  _neq?: InputMaybe<Scalars['uuid']['input']>;
+  _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
+};
+
 export type SaveImageMutationVariables = Exact<{
   data: Images_Insert_Input;
 }>;
@@ -861,6 +2471,18 @@ export type UpdateUserMutationVariables = Exact<{
 export type UpdateUserMutation = {
   __typename?: 'mutation_root';
   update_users_by_pk?: { __typename?: 'users'; id: string } | null;
+};
+
+export type InsertBooksMutationVariables = Exact<{
+  books: Array<Bible_Books_Insert_Input> | Bible_Books_Insert_Input;
+}>;
+
+export type InsertBooksMutation = {
+  __typename?: 'mutation_root';
+  insert_bible_books?: {
+    __typename?: 'bible_books_mutation_response';
+    returning: Array<{ __typename?: 'bible_books'; id: string }>;
+  } | null;
 };
 
 export const SaveImageDocument = {
@@ -1156,3 +2778,69 @@ export const UpdateUserDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
+export const InsertBooksDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'InsertBooks' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'books' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'ListType',
+              type: {
+                kind: 'NonNullType',
+                type: {
+                  kind: 'NamedType',
+                  name: { kind: 'Name', value: 'bible_books_insert_input' },
+                },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'insert_bible_books' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'objects' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'books' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'returning' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<InsertBooksMutation, InsertBooksMutationVariables>;
