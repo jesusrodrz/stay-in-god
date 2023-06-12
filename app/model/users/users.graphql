@@ -40,3 +40,11 @@ mutation InsertBooks($books: [bible_books_insert_input!]!) {
     }
   }
 }
+
+mutation InsertVerses($verses: [bible_verses_insert_input!]!) {
+  insert_bible_verses(objects: $verses) {
+    returning {
+      id
+    }
+  }
+}

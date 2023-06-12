@@ -14,7 +14,22 @@ const config: CodegenConfig = {
   generates: {
     './app/types/generated/': {
       preset: 'client',
-      config: {},
+      config: {
+        scalars: {
+          ID: { input: ' string | number', output: 'string' },
+          String: { input: 'string', output: 'string' },
+          Boolean: { input: 'boolean', output: 'boolean' },
+          Int: { input: 'number', output: 'number' },
+          Float: { input: 'number', output: 'number' },
+          _int4: {
+            input: '`{${string}}`',
+            output: 'number[]',
+          },
+          date: { input: 'any', output: 'any' },
+          timestamptz: { input: 'string', output: 'string' },
+          uuid: { input: 'string', output: 'string' },
+        },
+      },
       plugins: [],
     },
   },
