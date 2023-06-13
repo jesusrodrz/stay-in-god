@@ -28,7 +28,7 @@ export type Scalars = {
   Int: { input: number; output: number };
   Float: { input: number; output: number };
   _int4: { input: `{${string}}`; output: number[] };
-  date: { input: any; output: any };
+  date: { input: string; output: string };
   timestamptz: { input: string; output: string };
   uuid: { input: string; output: string };
 };

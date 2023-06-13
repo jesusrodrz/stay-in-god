@@ -37,9 +37,7 @@ function App(): JSX.Element {
           },
           fetchPolicy: 'network-only',
         })
-        .then(data => {
-          console.log(data);
-        });
+        .then(() => {});
     }
   }, [user]);
 

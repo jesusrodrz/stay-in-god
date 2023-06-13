@@ -25,7 +25,7 @@ const config: CodegenConfig = {
             input: '`{${string}}`',
             output: 'number[]',
           },
-          date: { input: 'any', output: 'any' },
+          date: { input: 'string', output: 'string' },
           timestamptz: { input: 'string', output: 'string' },
           uuid: { input: 'string', output: 'string' },
         },
