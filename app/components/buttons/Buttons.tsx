@@ -15,7 +15,7 @@ export function ProfileButton() {
       variant="ghost"
       _icon={{
         as: Ionicons,
-        name: 'ios-person',
+        name: 'person-outline',
         color: 'blueGray.600',
       }}
       onPress={() => {
